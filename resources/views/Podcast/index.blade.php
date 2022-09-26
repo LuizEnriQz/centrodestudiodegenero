@@ -31,8 +31,6 @@
                                 allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
                             </iframe>
                             <button type="button" class="btn btn-alert" style="font-family: 'Filson Pro Regular', sans-serif;" onclick="modal({{$pod}})">Información</button>
-                            {{-- <a href="{{ route('podcast.edit', $podcast->id) }}" type="submit" class="btn" style="background:#361cfa"> <i class="fa fa-magic"></i></a>
-                            <a href="{{ route('podcast.borrarPodcast', $podcast->id) }}" type="submit" class="btn btn-danger"> <i class="fa fa-trash"></i></a> --}}
                         </div>
                     </div>
                 @endforeach
@@ -78,6 +76,8 @@ function modal(element) {
 document.querySelector('#nombre').innerText = element.nombre
 document.querySelector('#episodio').innerText = element.episodio
 document.querySelector('#descripcion').innerText = element.descripcion
+
+$('#modalPodcast').modal('show')
 //
 var url = "{{ route('borrarPodcast', ':id') }}";
 url = url.replace(':id', element.id);
@@ -89,7 +89,6 @@ url = url.replace(':id', element.id);
 document.getElementById('editarPodcast').href = url;
 console.log(url);
 
-$('#modalPodcast').modal('show')
 
 }
 </script>
