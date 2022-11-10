@@ -1,0 +1,55 @@
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.paginacion{
+    text-align: center;
+    margin: 30 px 30 px 60px;
+    user-select: none;
+}
+
+.paginacion li{
+    display: inline-block;
+    margin: 5px;
+    box-shadow: 0 5px 25px rgb(1 1 1 / 10%);
+}
+
+.paginacion li a{
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.2em;
+    line-height: 45px;
+}
+
+.pag-prev, .pag-prox{
+    background: #e1241aff;
+    width: 80px;
+    border-radius: 45px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.pag-prev:hover{
+    transform: translateX(-5px);
+}
+
+.pag-prox:hover{
+    transform: translateX(+5px);
+}
+
+.pag-actual, .puntos{
+    background: #c2babaff;
+    width: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.activo{
+    background: #e1241aff;
+}
+
+.inactivo{
+    background: #c2babaff;
+}

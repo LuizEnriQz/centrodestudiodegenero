@@ -25,11 +25,18 @@ Route::resource('encuestas','App\Http\Controllers\EncuestasController');
 Route::resource('podcast','App\Http\Controllers\PodcastController');
 Route::resource('publicaciones','App\Http\Controllers\PublicacionController');
 
-// Route::get('/', function () {
-//     return view('welcome');
-// })->name('welcome');
+Route::get('/acercade', function () {
+    return view('acercade');
+})->name('acercade');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+/////////Centro de estudio pagina de prueba piloto///////////
+Route::get('/centrodeestudio_prueba', function () {
+    return view('centrodeestudio_prueba');
+})->name('centrodeestudio_prueba');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
+
+////////////RUTAS DEL PROYECTO POR SECCIÓN///////////////
 
 ////////////////////////Podcast/////////////////////////
 Route::get('/delete_podcast/{id}', array(
@@ -75,3 +82,9 @@ Route::get('/borrarPublicacion/{id}', array(
     'uses' =>'App\Http\Controllers\PublicacionController@borrarPublicacion'
 ))->name('publicaciones.borrarPublicacion');
 
+///// rutas de Pruebas /////
+
+Route::get('/prueba', array(
+    // 'middleware' => 'auth',
+    'uses' =>'App\Http\Controllers\PodcastController@prueba'
+))->name('podcast.prueba');

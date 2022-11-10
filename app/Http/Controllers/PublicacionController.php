@@ -41,19 +41,41 @@ class PublicacionController extends Controller
     public function store(Request $request)
     {
         $validateData = $this->validate($request, [
-            'nombre' => 'required',
+            'titulo' => 'required',
+            'descripcion' => 'required',
+            'autor' => 'required',
+            'foto' => 'required|image|mimes:jpg,png,jpeg,gif,svg',
+            'portada' => 'required|image|mimes:jpg,png,jpeg,gif,svg',
             'file'=>'required|mimes:pdf',
         ]);
         $publicaciones = new Publicacion();
-        $publicaciones->nombre = $request->input('nombre');
+        $publicaciones->titulo = $request->input('titulo');
+        $publicaciones->descripcion = $request->input('descripcion');
+        $publicaciones->autor = $request->input('autor');
         $publicaciones->file = $request->file->getClientOriginalName();
+        $publicaciones->foto = $request->foto->getClientOriginalName();
+        $publicaciones->portada = $request->portada->getClientOriginalName();
         $publicaciones->activo=1;
 
         $publicaciones->save();
 
+        if ($request->portada) {
+            $portadaArchivo = $request->portada->getClientOriginalName();
+            $directorioArchivo = $request->file('portada')->storeAs('public/publicaciones_portada', $portadaArchivo);
+            $Publicacion_modelo = new Publicacion();
+            $Publicacion_modelo->file_path = '/storage/app/public/' . $directorioArchivo;
+        }
+
         if ($request->file) {
-            $nombreArchivo = $request->file->getClientOriginalName();
-            $directorioArchivo = $request->file('file')->storeAs('public/publicaciones_pdf', $nombreArchivo);
+            $tituloArchivo = $request->file->getClientOriginalName();
+            $directorioArchivo = $request->file('file')->storeAs('public/publicaciones_pdf', $tituloArchivo);
+            $Publicacion_modelo = new Publicacion();
+            $Publicacion_modelo->file_path = '/storage/app/public/' . $directorioArchivo;
+        }
+
+        if ($request->foto) {
+            $fotoArchivo = $request->foto->getClientOriginalName();
+            $directorioArchivo = $request->file('foto')->storeAs('public/publicaciones_fotos', $fotoArchivo);
             $Publicacion_modelo = new Publicacion();
             $Publicacion_modelo->file_path = '/storage/app/public/' . $directorioArchivo;
         }
@@ -75,17 +97,17 @@ class PublicacionController extends Controller
         return response()->file($path, $header);
     }
 
-    public function mostrarppt($id)
-    {
-        $publicacionEncontrada = Publicacion::find($id);
-
-        $path = storage_path('app/public/publicaciones_ppt/' . $publicacionEncontrada->file);
-        $header = [
-        'Content-Type' => 'application/vnd.ms-powerpoint',
-        'Content-Disposition' => 'inline; filename="' . $publicacionEncontrada->file . '"'
-        ];
-        return response()->file($path, $header);
-    }
+//     public function mostrarppt($id)
+//     {
+//         $publicacionEncontrada = Publicacion::find($id);
+//
+//         $path = storage_path('app/public/publicaciones_ppt/' . $publicacionEncontrada->file);
+//         $header = [
+//         'Content-Type' => 'application/vnd.ms-powerpoint',
+//         'Content-Disposition' => 'inline; filename="' . $publicacionEncontrada->file . '"'
+//         ];
+//         return response()->file($path, $header);
+//     }
 
     /**
      * Display the specified resource.
@@ -120,12 +142,30 @@ class PublicacionController extends Controller
     public function update(Request $request, $id)
     {
         $publicaciones = Publicacion::find($id);
-        $publicaciones->nombre = $request->input('nombre');
+        $publicaciones->titulo = $request->input('titulo');
+        $publicaciones->descripcion = $request->input('descripcion');
+        $publicaciones->autor = $request->input('autor');
+
+       if(isset($request->portada)){
+
+              $publicaciones->portada = $request->portada->getClientOriginalName();
+              $directorioArchivo = $request->file('portada')->storeAs('public/publicaciones_portada', $publicaciones->portada);
+              $Publicacion_modelo = new Publicacion();
+              $Publicacion_modelo->file_path = '/storage/app/public/' . $directorioArchivo;
+          }
 
         if(isset($request->file)){
 
                $publicaciones->file = $request->file->getClientOriginalName();
                $directorioArchivo = $request->file('file')->storeAs('public/publicaciones_pdf', $publicaciones->file);
+               $Publicacion_modelo = new Publicacion();
+               $Publicacion_modelo->file_path = '/storage/app/public/' . $directorioArchivo;
+           }
+
+        if(isset($request->foto)){
+
+               $publicaciones->foto = $request->file->getClientOriginalName();
+               $directorioArchivo = $request->file('foto')->storeAs('public/publicaciones_fotos', $publicaciones->foto);
                $Publicacion_modelo = new Publicacion();
                $Publicacion_modelo->file_path = '/storage/app/public/' . $directorioArchivo;
            }

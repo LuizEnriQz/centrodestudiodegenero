@@ -15,8 +15,12 @@ class CreatePublicacionsTable extends Migration
     {
         Schema::create('publicacions', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre',120);
-            $table->string('file',250);
+            $table->string('titulo',120);
+            $table->string('descripcion',250);
+            $table->string('autor',50);
+            $table->string('foto',250);// Archivo de Imagen
+            $table->string('portada',250);// Archivo de Imagen
+            $table->string('file',250);// Archivo PDF
             $table->integer('activo');
             $table->timestamps();
         });

@@ -34,16 +34,39 @@
 
                         <div class="row align-items-center">
                             <div class="col-md-7">
-                                <label class="font-weight-bold" for="nombre"><b>Nombre de la Publicación:</b></label>
-                                <input type="text" class="form-control" id="nombre" name="nombre"
-                                value="{{ $publicaciones->nombre }}">
+                                <label class="font-weight-bold" for="titulo"><b>Titulo de la Publicación:</b></label>
+                                <input type="text" class="form-control" id="titulo" name="titulo"
+                                value="{{ $publicaciones->titulo}}">
                             </div>
                             <br>
-                            <div class="col-md-6">
+                            <div class="col-md-5">
+                                <label class="font-weight-bold" for="autor"><b>Autor de la Publicación:</b></label>
+                                <input type="text" class="form-control" id="autor" name="autor"
+                                value="{{ $publicaciones->autor}}">
+                            </div>
+                            <br>
+                            <div class="col-md-12">
+                                <label class="font-weight-bold" for="descripcion"><b>Descripción:</b></label>
+                                <input type="text" class="form-control" id="descripcion" name="descripcion"
+                                value="{{ $publicaciones->descripcion}}">
+                            </div>
+                            <br>
+                            <div class="col-md-9">
+                                <br>
+                                <label class="font-weight-bold" for="foto">Seleccione la foto del autor de la publicación</label>
+                                <input type="file" name="foto"  id="chooseFile" accept="image/*">
+                            </div>
+                            <br>
+                            <div class="col-md-9">
+                                <br>
+                                <label class="font-weight-bold" for="portada">Seleccione el archivo de la portada de la publicación </label>
+                                <input type="file" name="portada"  id="chooseFile" accept="application/pdf">
+                            </div>
+                            <br>
+                            <div class="col-md-9">
                                 <br>
                                 <label class="font-weight-bold" for="file">Seleccione el archivo de la publicación que desea subir </label>
-                                <input type="file" name="file"  id="chooseFile" accept="application/pdf"
-                                >
+                                <input type="file" name="file"  id="chooseFile" accept="application/pdf">
                             </div>
                         </div>
                         <br>

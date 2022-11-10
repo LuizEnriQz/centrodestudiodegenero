@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Podcast;
 use Illuminate\Http\Request;
+// use Illuminate\Pagination\CursorPaginator;
+// use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\DB;
 
 class PodcastController extends Controller
 {
@@ -14,8 +17,14 @@ class PodcastController extends Controller
      */
     public function index()
     {
-        $podcast = Podcast::orderby('id','desc')->where('activo','=',1)->get();
+        $podcast = Podcast::orderby('id','desc')->where('activo','=',1)->paginate(5);
         return view ('Podcast.index',compact('podcast'));
+    }
+
+    public function prueba()
+    {
+        $podcast = Podcast::orderby('id','desc')->where('activo','=',1)->paginate(5);
+        return view ('Podcast.prueba',compact('podcast'));
     }
 
     /**

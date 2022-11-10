@@ -2,6 +2,12 @@
     .nav-link {
         color: white;
     }
+    .navbar-nav .nav-link:hover {
+        border-top: 2px solid #fff;
+        border-bottom: 2px solid #fff;
+        background:transparent;
+        padding: 6px 0;
+    }
 </style>
 <!-- navbar navbar-expand-lg" style="background:#195270 -->
 <nav class="navbar navbar-light navbar-expand-md sticky-top shadow-lg" style="background:#e1251b">
@@ -25,6 +31,12 @@
                         Inicio
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('acercade') }}" class="nav-link text-white"
+                        style="font-family: 'Filson Pro', sans-serif;">
+                        A cerca de
+                    </a>
+                </li>
                 <li class="nav-item" style="font-family: 'Filson Pro', sans-serif;">
                     <a href="http://revistalaventana.cucsh.udg.mx/index.php/LV" target="_blank"
                         class="nav-link text-white">
@@ -35,23 +47,19 @@
                     <a href="{{ route('podcast.index') }}" class="nav-link text-white">
                         <i class="fab fa-spotify pe-1"></i>Otra Ventana (Podcast)</a>
                 </li>
-                {{-- <li class="nav-item">
-                    <a href="{{ route('centrodocumentacion.index') }}" class="nav-link text-white"
-                        style="font-family: 'Filson Pro', sans-serif;">
-                        Centro de Documentación
-                    </a>
-                </li> --}}
                 <li class="nav-item">
                     <a href="{{ route('carteles.index') }}" class="nav-link text-white"
                         style="font-family: 'Filson Pro', sans-serif;">
-                        Carteles
+                        Actividades
                     </a>
                 </li>
+
                 <li class="nav-item">
                     <a href="{{ route('publicaciones.index') }}" class="nav-link text-white" style="font-family: 'Filson Pro', sans-serif;">
                         Publicaciones
                     </a>
                 </li>
+
                 <li class="nav-item">
                     <a href="#Contacto" class="nav-link text-white" style="font-family: 'Filson Pro', sans-serif;">
                         Contacto
@@ -66,11 +74,11 @@
                         </li>
                     @endif
 
-                    @if (Route::has('register'))
+                    {{-- @if (Route::has('register'))
                         <li class="nav-item">
                             <a class="nav-link text-white" href="{{ route('register') }}">{{ __('Registrarse') }}</a>
                         </li>
-                    @endif
+                    @endif --}}
                 @else
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button"
@@ -82,7 +90,7 @@
                             <a class="dropdown-item bg-dark text-white" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
+                                {{ __('Cerrar Sesión') }}
                             </a>
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
